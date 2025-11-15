@@ -1,0 +1,9 @@
+.dart_tool/
+.idea/
+.vscode/
+build/
+android/.kotlin/errors/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+android/.gradle/
+pubspec.lock

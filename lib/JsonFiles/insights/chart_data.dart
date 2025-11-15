@@ -1,0 +1,24 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'chart_data.g.dart';
+
+@JsonSerializable()
+class ChartData {
+  @JsonKey(name: 'period')
+  final periodDynamic;
+  @JsonKey(name: 'total')
+  final totalDynamic;
+
+  ChartData(
+    this.periodDynamic,
+    this.totalDynamic,
+  );
+
+  factory ChartData.fromJson(Map<String, dynamic> json) =>
+      _$ChartDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChartDataToJson(this);
+
+  String get period => "$periodDynamic";
+  String get total => "$totalDynamic";
+}
