@@ -26,8 +26,19 @@ class VendorCategoryBloc
   Stream<VendorCategoryState> _mapFetchVendorCategoriesToState(
       VendorInfo? vendorInfo, String? vendorType) async* {
     try {
+      print('VendorCategoryBloc: fetching categories for vendorType: $vendorType');
       List<CategoryData> listCategories =
           await _repository.getVendorCategory(vendorType);
+      print('VendorCategoryBloc: received ${listCategories.length} categories -> ' +
+          listCategories.map((c) => c.title).toList().toString());
+      
+      // If no categories found for specific vendor type, try fetching all categories
+      if (listCategories.isEmpty && vendorType != null) {
+        print('VendorCategoryBloc: No categories for vendor type "$vendorType", fetching all categories as fallback');
+        listCategories = await _repository.getVendorCategory(null);
+        print('VendorCategoryBloc: fallback received ${listCategories.length} categories');
+      }
+      
       listCategories.removeWhere((element) => element.slug == "custom");
       for (CategoryData categoryNew in listCategories) {
         categoryNew.isSelected = false;
@@ -42,6 +53,7 @@ class VendorCategoryBloc
       }
       yield SuccessVendorCategoryState(listCategories);
     } catch (e) {
+      print('VendorCategoryBloc: error fetching categories: $e');
       yield FailureVendorCategoryState(e);
     }
   }

@@ -9,7 +9,8 @@ android.apply {
         create("vendor") {
             dimension = "flavor-type"
             applicationId = "com.flutter.deligo_vendor"
-            resValue("string", "app_name", "Deligo Vendor")
+            resValue("string", "app_name", "MartGo Vendor")
         }
+   
     }
 }

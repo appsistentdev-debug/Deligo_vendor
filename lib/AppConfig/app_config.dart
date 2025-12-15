@@ -11,7 +11,7 @@ import 'package:delivoo_store/Locale/turkish.dart';
 import 'package:delivoo_store/flavors.dart';
 
 class AppConfig {
-  static String appName = F.title;
+  static String get appName => F.title;
   static const String baseUrl = "http://10.0.2.2:8000/api/";
   static const String googleApiKey = "YourGoogleMapsApiKey";
   static const String onesignalAppId = "98fecee9-ad67-4d49-bd1a-f959569f3cbc";
@@ -23,7 +23,7 @@ class AppConfig {
   };
   static final Map<String, AppLanguage> languagesSupported = {
     "en": AppLanguage("English", englishLocale()),
-    //"ar": AppLanguage("عربى", arabicLocale()),
+  
     "fr": AppLanguage("Français", frenchLocale()),
     "es": AppLanguage("Española", spanishLocale()),
     "id": AppLanguage("Bahasa Indonesia", indonesianLocale()),

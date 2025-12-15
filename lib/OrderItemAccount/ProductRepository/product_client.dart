@@ -62,7 +62,7 @@ abstract class ProductClient {
       @Query('page') int pageNo);
 
   @GET("/categories?pagination=0")
-  Future<List<CategoryData>> getCategories({
+  Future<List<CategoryData>> getCategories({ 
     @Query("parent") int? parent,
     @Query("scope") String? scope,
     @Query("meta[vendor_type]") String? vendorType,

@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unnecessary_null_comparison
-
 part of 'home_client.dart';
 
 // **************************************************************************
@@ -44,7 +42,7 @@ class _HomeClient implements HomeClient {
           .map((dynamic i) => GetAddress.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -91,7 +89,7 @@ class _HomeClient implements HomeClient {
     try {
       _value = ListVendors.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -121,7 +119,7 @@ class _HomeClient implements HomeClient {
     try {
       _value = ListProduct.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -167,7 +165,7 @@ class _HomeClient implements HomeClient {
     try {
       _value = FileUploadResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;

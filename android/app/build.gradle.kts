@@ -48,20 +48,32 @@ android {
         targetSdk = 36
         versionCode = flutterVersionCode
         versionName = flutterVersionName
+
+        // Add these: Update by Prateek 
+        manifestPlaceholders.putAll(
+        mapOf(
+            "onesignal_app_id" to "ONESIGNAL_APP_ID_VENDOR",
+            "onesignal_google_project_number" to "1080082400269"
+        )
+      )
     }
 
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties.getProperty("keyAlias")
-            keyPassword = keystoreProperties.getProperty("keyPassword")
-            storeFile = file(keystoreProperties.getProperty("storeFile")!!)
-            storePassword = keystoreProperties.getProperty("storePassword")
+            if (keystoreProperties.isNotEmpty()) {
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+                storeFile = file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+            }
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+            if (keystoreProperties.isNotEmpty()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             // isMinifyEnabled = true
             // isShrinkResources = true
         }

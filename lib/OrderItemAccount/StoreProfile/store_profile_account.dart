@@ -4,14 +4,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:delivoo_store/Auth/AuthRepo/auth_repository.dart';
 import 'package:delivoo_store/Auth/BLoC/auth_bloc.dart';
 import 'package:delivoo_store/Auth/BLoC/auth_event.dart';
 import 'package:delivoo_store/Components/bottom_bar.dart';
 import 'package:delivoo_store/Components/cached_image.dart';
-import 'package:delivoo_store/Components/entry_field.dart';
 import 'package:delivoo_store/Components/loader.dart';
 import 'package:delivoo_store/Components/show_toast.dart';
 import 'package:delivoo_store/JsonFiles/Categories/category_data.dart';
@@ -19,19 +17,21 @@ import 'package:delivoo_store/JsonFiles/User/Put/update_vendor.dart';
 import 'package:delivoo_store/JsonFiles/User/Put/update_vendor_meta.dart';
 import 'package:delivoo_store/JsonFiles/User/vendor_info.dart';
 import 'package:delivoo_store/Locale/locales.dart';
-import 'package:delivoo_store/Maps/UI/location_page.dart';
 import 'package:delivoo_store/OrderItemAccount/Account/UpdateProfileBloc/update_profile_bloc.dart';
 import 'package:delivoo_store/OrderItemAccount/Account/UpdateProfileBloc/update_profile_event.dart';
 import 'package:delivoo_store/OrderItemAccount/Account/UpdateProfileBloc/update_profile_state.dart';
 import 'package:delivoo_store/OrderItemAccount/Account/VendorCategoryBloc/vendor_category_bloc.dart';
 import 'package:delivoo_store/OrderItemAccount/Account/VendorCategoryBloc/vendor_category_event.dart';
 import 'package:delivoo_store/OrderItemAccount/Account/VendorCategoryBloc/vendor_category_state.dart';
-import 'package:delivoo_store/Themes/colors.dart';
-import 'package:delivoo_store/Themes/style.dart';
-import 'package:delivoo_store/UtilityFunctions/app_settings.dart';
-import 'package:delivoo_store/UtilityFunctions/helper.dart';
 import 'package:delivoo_store/UtilityFunctions/picker.dart';
+import 'package:delivoo_store/Components/entry_field.dart';
+import 'package:delivoo_store/Maps/UI/location_page.dart';
+import 'package:delivoo_store/Themes/colors.dart';
+import 'package:delivoo_store/UtilityFunctions/helper.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:delivoo_store/UtilityFunctions/app_settings.dart';
 import 'package:delivoo_store/theme_cubit.dart';
+import 'package:delivoo_store/Themes/style.dart';
 
 class AccountProfilePage extends StatelessWidget {
   final VendorInfo vendorInfo;
@@ -118,9 +118,7 @@ class _AccountRegisterFormState extends State<AccountRegisterForm> {
   late UpdateProfileBloc _updateProfileBloc;
   String? imageUrl, openingTime, closingTime, documentLic, documentId;
   List<int> categories = [];
-  List<CategoryData> categoriesAll = [
-    CategoryData(id: 22, slug: 'dsfd', title: 'sfsfds', sortOrder: 1)
-  ];
+  List<CategoryData> categoriesAll = [];
   double? longitude;
   double? latitude;
   bool isLoaderShowing = false;
@@ -234,10 +232,7 @@ class _AccountRegisterFormState extends State<AccountRegisterForm> {
               builder: (context, categoryState) {
             if (categoryState is SuccessVendorCategoryState) {
               categoriesAll = categoryState.listCategories;
-              // if (categoriesAll.isEmpty) {
-              //   categoriesAll.add(CategoryData(
-              //       id: 22, slug: 'dsfd', title: 'sfsfds', sortOrder: 1));
-              // }
+              print('StoreProfile: SuccessVendorCategoryState -> ${categoriesAll.length} categories');
               return ListView(
                 children: [
                   SizedBox(height: 16),
@@ -358,16 +353,32 @@ class _AccountRegisterFormState extends State<AccountRegisterForm> {
                     child: EntryField(
                       controller: _storeCategoryController,
                       onTap: () {
-                        if (categoriesAll.isEmpty) {
+                        // Get current categories from BLoC state
+                        final vendorCategoryBloc =
+                            BlocProvider.of<VendorCategoryBloc>(context);
+                        final currentState = vendorCategoryBloc.state;
+
+                        if (currentState is! SuccessVendorCategoryState) {
                           showToast(AppLocalizations.of(context)!
-                              .getTranslationOf("empty_categories"));
+                              .getTranslationOf("loading"));
                           return;
                         }
+
+                        List<CategoryData> categoriesToShow =
+                            currentState.listCategories;
+
+                        // If no categories for this vendor type, show a helpful message
+                        if (categoriesToShow.isEmpty) {
+                          showToast(
+                              'No categories available for "${_vendorTypeController.text}". System will use general categories. Please contact support if this is incorrect.');
+                          return;
+                        }
+
                         showModalBottomSheet(
                           context: context,
                           isDismissible: false,
                           builder: (context) =>
-                              CategorySelectionSheet(categoriesAll),
+                              CategorySelectionSheet(categoriesToShow),
                         ).then((value) {
                           if (value != null) {
                             List<CategoryData> categoriesSelected = [];
@@ -380,6 +391,7 @@ class _AccountRegisterFormState extends State<AccountRegisterForm> {
                                 .map((e) => e.title)
                                 .toList()
                                 .join(', ');
+                            setState(() {});
                           }
                         });
                       },
@@ -923,3 +935,4 @@ class _CategorySelectionSheetState extends State<CategorySelectionSheet> {
     );
   }
 }
+

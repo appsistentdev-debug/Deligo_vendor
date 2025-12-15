@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unnecessary_null_comparison
-
 part of 'product_client.dart';
 
 // **************************************************************************
@@ -46,7 +44,7 @@ class _ProductClient implements ProductClient {
     try {
       _value = OrderData.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -73,7 +71,7 @@ class _ProductClient implements ProductClient {
     try {
       _value = OrderData.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -109,7 +107,7 @@ class _ProductClient implements ProductClient {
         (json) => OrderData.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -145,7 +143,7 @@ class _ProductClient implements ProductClient {
         (json) => OrderData.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -183,7 +181,7 @@ class _ProductClient implements ProductClient {
         (json) => ProductData.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -210,7 +208,7 @@ class _ProductClient implements ProductClient {
     try {
       _value = ListVendors.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -237,7 +235,7 @@ class _ProductClient implements ProductClient {
     try {
       _value = WalletBalance.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -267,7 +265,7 @@ class _ProductClient implements ProductClient {
         (json) => Transaction.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -281,7 +279,6 @@ class _ProductClient implements ProductClient {
     String? parentCatIdsCommaSeparated,
     String? query,
   }) async {
-    print('GET CATEGORIES CALLED😂😂');
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'parent': parent,
@@ -304,17 +301,15 @@ class _ProductClient implements ProductClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    print(_result.data.toString() + '.............');
     late List<CategoryData> _value;
     try {
       _value = _result.data!
           .map((dynamic i) => CategoryData.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
-    print(_value);
     return _value;
   }
 
@@ -360,7 +355,7 @@ class _ProductClient implements ProductClient {
     try {
       _value = ProductData.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -391,7 +386,7 @@ class _ProductClient implements ProductClient {
     try {
       _value = ProductData.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -420,7 +415,7 @@ class _ProductClient implements ProductClient {
           .map((dynamic i) => Setting.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -455,7 +450,7 @@ class _ProductClient implements ProductClient {
     try {
       _value = VendorInsight.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -487,7 +482,7 @@ class _ProductClient implements ProductClient {
         (json) => ProductData.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -520,7 +515,7 @@ class _ProductClient implements ProductClient {
         (json) => RatingsData.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -566,7 +561,7 @@ class _ProductClient implements ProductClient {
     try {
       _value = FileUploadResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
