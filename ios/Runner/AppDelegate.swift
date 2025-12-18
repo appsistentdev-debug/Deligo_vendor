@@ -9,7 +9,7 @@ import OneSignalFramework  // OneSignal update by Prateek
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    GMSServices.provideAPIKey("AIzaSyCQNbOlbjGZVm2UaHgu11Nu5YQM3APhYrQ") // add this line with your iOS key update by Prateek
+    GMSServices.provideAPIKey("YOUR_MAP_API_KEY") // add this line with your iOS key update by Prateek
 
     // OneSignal Debug Logs (optional) update by prateek
     OneSignal.Debug.setLogLevel(.LL_VERBOSE)
